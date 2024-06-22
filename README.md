@@ -34,11 +34,20 @@ ZMSMS_GATEWAY_PASSWORD=password
 
 ### Sending SMS
 Example usage on how to send SMS from your app
+
+```php
+use Shengamo\Zmsms\Facades\Zmsms;
+
+Zmsms::sendSMS(senderId, Message, ['zambia_mobile number e.g. 0760123456']);
+```
+Ensure your sender ID is already registered on zmSMS or the package will return an error.
+
 ```php
 use Shengamo\Zmsms\Facades\Zmsms;
 
 Zmsms::sendSMS('Shengamo', 'Hello from Zmsms!', ['0971977252', '0776639088']);
 ```
+
 
 ### Checking Balance
 ```php
