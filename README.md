@@ -16,6 +16,8 @@ composer require shengamo/zmsms
 
 ## Usage
 
+The process of the plugin is first to check if you have enough balance to send out the number of SMS's you would like to send out.
+If you have enough, the messages will be sent but if you do not have enough remaining you will receive a response of "Insufficient balance".
 ### Configuration
 Publish the configuration file:
 ```php
@@ -50,7 +52,7 @@ echo "Current SMS balance: " . $balance['response_description'];
 ### Testing
 
 ```bash
-composer test
+vendor/bin/phpunit tests
 ```
 
 ### Changelog
