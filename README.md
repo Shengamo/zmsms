@@ -16,8 +16,35 @@ composer require shengamo/zmsms
 
 ## Usage
 
+### Configuration
+Publish the configuration file:
 ```php
-// Usage description here
+php artisan vendor:publish --provider="Shengamo\Zmsms\ZmsmsServiceProvider"
+```
+
+Add the following environment variables to your `.env` file:
+
+```php
+ZMSMS_GATEWAY_BASE_URL=https://zmsms.online/api/v1/
+ZMSMS_GATEWAY_USERNAME=your_user_name
+ZMSMS_GATEWAY_PASSWORD=password
+```
+
+### Sending SMS
+Example usage on how to send SMS from your app
+```php
+use Shengamo\Zmsms\Facades\Zmsms;
+
+Zmsms::sendSMS('Shengamo', 'Hello from Zmsms!', ['0971977252', '0776639088']);
+```
+
+### Checking Balance
+```php
+use Shengamo\Zmsms\Facades\Zmsms;
+
+// Example usage to check SMS balance
+$balance = Zmsms::getBalance();
+echo "Current SMS balance: " . $balance['response_description'];
 ```
 
 ### Testing

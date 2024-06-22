@@ -19,7 +19,8 @@ class ZmsmsServiceProvider extends ServiceProvider
         // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         // $this->loadRoutesFrom(__DIR__.'/routes.php');
 
-        if ($this->app->runningInConsole()) {
+//        if ($this->app->runningInConsole()) {
+
             $this->publishes([
                 __DIR__.'/../config/config.php' => config_path('zmsms.php'),
             ], 'config');
@@ -41,7 +42,7 @@ class ZmsmsServiceProvider extends ServiceProvider
 
             // Registering package commands.
             // $this->commands([]);
-        }
+//        }
     }
 
     /**
@@ -51,6 +52,7 @@ class ZmsmsServiceProvider extends ServiceProvider
     {
         // Automatically apply the package configuration
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'zmsms');
+
 
         // Register the main class to use with the facade
         $this->app->singleton('zmsms', function () {
