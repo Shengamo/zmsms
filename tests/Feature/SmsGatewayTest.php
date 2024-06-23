@@ -13,7 +13,8 @@ class SmsGatewayTest extends TestCase
         Http::fake([
             'https://zmsms.online/api/v1/balance' => Http::response([
                 'response_code' => '0',
-                'response_description' => 'Your balance is 947 SMS(s)'
+                'response_description' => 'Your balance is 947 SMS(s)',
+                'balance' => 947
             ], 200)
         ]);
 
@@ -26,11 +27,12 @@ class SmsGatewayTest extends TestCase
     public function test_can_send_SMS_with_sufficient_balance()
     {
         Http::fake([
-            'https://zmsms.online/api/v1/balance' => Http::response([
+            config('zmsms.base_url') . 'balance' => Http::response([
                 'response_code' => '0',
-                'response_description' => 'Your balance is 947 SMS(s)'
+                'response_description' => 'Your balance is 947 SMS(s)',
+                'balance' => 947
             ], 200),
-            'https://zmsms.online/api/v1/bulksms' => Http::response([
+            config('zmsms.base_url') . 'bulksms' => Http::response([
                 'response_code' => '0',
                 'response_description' => 'Message Sent'
             ], 200)
@@ -46,27 +48,29 @@ class SmsGatewayTest extends TestCase
     public function test_send_SMS_with_insufficient_balance()
     {
         Http::fake([
-            config('zmsms.base_url') .'balance' => Http::response([
+            config('zmsms.base_url') . 'balance' => Http::response([
                 'response_code' => '0',
-                'response_description' => 'Your balance is 0 SMS(s)'
+                'response_description' => 'Your balance is 0 SMS(s)',
+                'balance' => 0
             ], 200)
         ]);
 
         $zmsms = new Zmsms();
         $response = $zmsms->sendSMS('MagicBrains', 'Hello, this is a test message.', ['0971977252', '0776639088']);
 
-        $this->assertEquals('1', $response['response_code']);
+        $this->assertEquals('0', $response['response_code']);
         $this->assertEquals('Insufficient balance', $response['response_description']);
     }
 
     public function test_send_SMS_with_insufficient_balance_for_multiple_recepients()
     {
         Http::fake([
-            config('zmsms.base_url') .'balance' => Http::response([
+            config('zmsms.base_url') . 'balance' => Http::response([
                 'response_code' => '0',
-                'response_description' => 'Your balance is 2 SMS(s)'
+                'response_description' => 'Your balance is 2 SMS(s)',
+                'balance' => 2
             ], 200),
-            'https://zmsms.online/api/v1/bulksms' => Http::response([
+            config('zmsms.base_url') . 'bulksms' => Http::response([
                 'response_code' => '0',
                 'response_description' => 'Message Sent'
             ], 200)
@@ -75,7 +79,7 @@ class SmsGatewayTest extends TestCase
         $zmsms = new Zmsms();
         $response = $zmsms->sendSMS('MagicBrains', 'Hello, this is a test message.', ['0971977252', '0967123456', '0776639088']);
 
-        $this->assertEquals('1', $response['response_code']);
+        $this->assertEquals('0', $response['response_code']);
         $this->assertEquals('Insufficient balance', $response['response_description']);
     }
 }

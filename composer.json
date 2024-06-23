@@ -17,9 +17,9 @@
         "illuminate/support": "~11|~10|~9"
     },
     "require-dev": {
-        "orchestra/testbench": "^8.0",
+        "orchestra/testbench": "^v8.23.2",
         "guzzlehttp/guzzle": "^7.2",
-        "phpunit/phpunit": "^9.0"
+        "phpunit/phpunit": "^10.5"
     },
     "autoload": {
         "psr-4": {

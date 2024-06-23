@@ -61,7 +61,7 @@ echo "Current SMS balance: " . $balance['response_description'];
 ### Testing
 
 ```bash
-vendor/bin/phpunit tests
+vendor/bin/phpunit
 ```
 
 ### Changelog

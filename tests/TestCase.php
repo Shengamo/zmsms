@@ -17,7 +17,7 @@ class TestCase extends OrchestraTestCase
         $this->app['config']->set('zmsms.password', 'test_password');
     }
 
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
             ZmsmsServiceProvider::class,
