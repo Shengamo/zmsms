@@ -38,7 +38,7 @@ Example usage on how to send SMS from your app
 ```php
 use Shengamo\Zmsms\Facades\Zmsms;
 
-Zmsms::sendSMS(senderId, Message, ['zambia_mobile number e.g. 0760123456']);
+Zmsms::sendSMS('senderId', 'Message', ['zambia_mobile number e.g. 0760123456']);
 ```
 Ensure your sender ID is already registered on zmSMS or the package will return an error.
 
